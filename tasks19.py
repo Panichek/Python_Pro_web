@@ -32,30 +32,27 @@ class Note(Base):
     title = Column(String(50), nullable=False)
     text = Column(String(100), nullable=False)
 
-engine = create_engine("sqlite:///tasks19.db")
-
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(engine)
-'''
+
 with Session() as session:
-    users = User(username="username 3",
+    users = User(username="username 4",
                  password="password",
                  )
     session.add(users)
     session.commit()
 
 with Session() as session:
-    category = Category(name="name 2",
+    category = Category(name="name 3",
                  description="description",
                  )
     session.add(category)
     session.commit()
 
 with Session() as session:
-    note = Note(title="title 2",
+    note = Note(title="title",
                  text="text",
                  )
     session.add(note)
     session.commit()
-'''
