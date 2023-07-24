@@ -30,21 +30,21 @@ class Note(Base):
     __tablename__ = 'note'
     id = Column(Integer, primary_key=True)
     title = Column(String(50), nullable=False)
-    text = Column(String(100), nullable=False)
+    text = Column(Text(), nullable=False)
 
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(engine)
 
 with Session() as session:
-    users = User(username="username 4",
+    users = User(username="username 1",
                  password="password",
                  )
     session.add(users)
     session.commit()
 
 with Session() as session:
-    category = Category(name="name 3",
+    category = Category(name="name 1",
                  description="description",
                  )
     session.add(category)
@@ -52,7 +52,7 @@ with Session() as session:
 
 with Session() as session:
     note = Note(title="title",
-                 text="text",
+                 text="text1234567890",
                  )
     session.add(note)
     session.commit()
