@@ -34,7 +34,7 @@ class Article(db.Model):
     text = db.Column(db.Text)
     description = db.Column(db.Text)
     author_id = db.Column(db.Integer, db.ForeignKey("author.id"))
-    author = db.relationship('Author', back_populates="articles")
+    author = db.relationship('Author', back_populates="article")
 
     def __str__(self):
         return self.name
