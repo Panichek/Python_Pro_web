@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h2>Login Page</h2><br>
+    <form method="POST">
+        {% for field in form %}
+        <p>{{field.label}} {{field(class="new_text")}}</p>
+        {% endfor %}
+        <button>Увійти</button>
+    </form>
+</body>
+</html>
