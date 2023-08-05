@@ -34,7 +34,9 @@ class Article(db.Model):
     text = db.Column(db.Text)
     description = db.Column(db.Text)
     author_id = db.Column(db.Integer, db.ForeignKey("author.id"))
-    author = db.relationship('Author', back_populates="article")
+    tag = db.relationship('Tag', secondary=article_tag_table,
+                              back_populates="article")
+
 
     def __str__(self):
         return self.name
@@ -44,6 +46,7 @@ class Tag(db.Model):
     __tablename__ = "tag"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-
+    article = db.relationship('Article', secondary=article_tag_table,
+                             back_populates="tag")
     def __str__(self):
         return self.name
