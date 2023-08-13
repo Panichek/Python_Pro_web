@@ -1,0 +1,22 @@
+{%from 'paginate_component.html' import render_pagination %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+
+{%for record in records %}
+<h2>{{record.name}}</h2>
+<p>{{record.score}}</p>
+<hr>
+{%endfor%}
+
+{{render_pagination(records,"get_record")}}
+
+
+
+</body>
+</html>
