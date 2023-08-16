@@ -32,6 +32,6 @@ while True:
         
     if choice == "5":
         item = create_item()
-        item_number = input("Введіть номер замітки:")
+        item_number = input("Введіть номер товару:")
         result = requests.put(base_url+str(item_number),json=item)
         print("Оновлено успішно")
