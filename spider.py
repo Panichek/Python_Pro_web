@@ -6,19 +6,21 @@
 import scrapy
 
 
-class StoreSpider(scrapy.Spider):
-    name = 'myspider'
-    start_urls = ['https://quotes.toscrape.com']
+class QuotesSpider(scrapy.Spider):
+    name = "quotes_spider"
+    start_urls = (
+        'http://quotes.toscrape.com/',
+    )
 
+    def parse(self, response):
+        quotes = response.xpath('//*[@class="quote"]')
+        for quote in quotes:
+            text = quote.xpath('.//*[@class="text"]/text()').extract_first()
+            author = quote.xpath('.//*[@itemprop="author"]/text()').extract_first()
 
-def parse(self, response):
-    for link in response.css("div.quote"):
-        yield response.follow(link, self.parse_page)
+            yield {'Text': text,
+                   'Author': author}
 
-    for next_page in response.css("div.quote"):
-        yield response.follow(next_page, self.parse)
-
-
-def parse_page(self, response):
-    yield {"text": response.css("span.text::text").get().strip(),
-           "author": response.css("span.small.author::author").get().strip()}
+        next_page_url = response.xpath('//*[@class="next"]/a/@href').extract_first()
+        absolute_next_page_url = response.urljoin(next_page_url)
+        yield scrapy.Request(absolute_next_page_url)
