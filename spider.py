@@ -12,21 +12,21 @@ class StoreSpider(scrapy.Spider):
 
 
 def parse(self, response):
-    for link in response.css("div.quote"):
+    for link in response.css("div.row"):
         yield response.follow(link, self.parse_page)
 
-    for next_page in response.css("div.quote"):
+    for next_page in response.css("div.row"):
         yield response.follow(next_page, self.parse)
 
 
 def parse_page(self, response):
-    yield {"text": response.css("span.autor::text").get().strip(),
-           "author": response.css("span.small::text").get().strip()}
+    yield {"text": response.css("span.text::text").get().strip(),
+           "author": response.css("span.small.author::author").get().strip()}
 
 
 '''
     def parse(self, response):
-        for quote in response.css("div.qute"):
+        for quote in response.css("div.row"):
             yield {
                 "text": quote.css("span.text::text").get(),
                 "author": quote.css("span small::text").get(),
